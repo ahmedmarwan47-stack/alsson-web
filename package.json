@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && cp -r public/* out/ 2>/dev/null || true",
+    "build": "next build && cp -r public/* out/ 2>/dev/null || true && node fix-fonts.js",
     "start": "next start",
     "lint": "eslint"
   },
