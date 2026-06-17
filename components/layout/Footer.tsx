@@ -1,0 +1,232 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+
+const FOOTER_SECTIONS = [
+  {
+    heading: "El Alsson School",
+    links: [
+      { label: "Homepage", href: "/" },
+      { label: "About Us", href: "/about" },
+      { label: "Facilities", href: "/facilities" },
+      { label: "Parents", href: "/parents" },
+      { label: "Guidance and Student Services", href: "/guidance" },
+    ],
+  },
+  {
+    heading: "Academics",
+    links: [
+      { label: "American School", href: "/academics/american" },
+      { label: "British School", href: "/academics/british" },
+      { label: "IB Diploma", href: "/academics/ib" },
+    ],
+  },
+  {
+    heading: "Student Life",
+    links: [
+      { label: "Leadership & Service", href: "/student-life/leadership" },
+      { label: "Arts & Culture", href: "/student-life/arts" },
+      { label: "Sports & Wellbeing", href: "/student-life/sports" },
+      { label: "Experiential Learning", href: "/student-life/experiential" },
+    ],
+  },
+  {
+    heading: "Admissions",
+    links: [
+      { label: "Admission Process", href: "/admissions" },
+      { label: "Take a Virtual Tour", href: "/admissions#tour", external: true },
+      { label: "Apply Now", href: "/admissions/apply", highlight: true, external: true },
+    ],
+  },
+  {
+    heading: "Explore",
+    links: [
+      { label: "Media & News", href: "/media-news" },
+      { label: "Featured Events", href: "/events" },
+      { label: "School Calendar", href: "/calendar" },
+      { label: "Life At El Alsson", href: "/student-life" },
+      { label: "Open Positions", href: "/careers" },
+      { label: "Alsson El Kheir", href: "/elkheir" },
+      { label: "Alumni", href: "/alumni" },
+    ],
+  },
+  {
+    heading: "Support",
+    links: [
+      { label: "Contact Us", href: "/contact" },
+      { label: "FAQs", href: "/faqs" },
+    ],
+  },
+];
+
+export default function Footer() {
+  const [expanded, setExpanded] = useState<string | null>(null);
+
+  return (
+    <footer
+      className="text-white"
+      style={{ background: "linear-gradient(to bottom, #001B25, #003346)" }}
+    >
+      {/* Newsletter */}
+      <div className="px-5 pt-10 pb-6">
+        <div className="mb-4">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/full-logo.png"
+            alt="El Alsson International Schools"
+            style={{ height: "52px", width: "auto", display: "block" }}
+          />
+        </div>
+
+        <div className="mb-8">
+          <p className="text-white font-medium text-[16px] mb-3">
+            Stay Updated With Our News
+          </p>
+          <div className="flex items-center gap-2 bg-white rounded-full p-1.5">
+            <input
+              type="email"
+              placeholder="Enter Your Email Address"
+              className="flex-1 min-w-0 bg-transparent text-[#0A0A0A] text-[14px] px-3 py-1.5 outline-none placeholder:text-[#A3A3A3]"
+            />
+            <button
+              className="shrink-0 rounded-full bg-[#0089B7] text-white text-[14px] font-medium px-4 py-2 active:bg-[#006E92] transition-colors"
+              style={{ boxShadow: "0px 4px 8px 0px rgba(0,0,0,0.2)" }}
+            >
+              Subscribe
+            </button>
+          </div>
+          <p className="text-white/60 text-[12px] mt-2 px-1">
+            We respect your privacy and only send what matters.
+          </p>
+        </div>
+
+        {/* Accordion link groups */}
+        <div className="border-t border-white/10">
+          {FOOTER_SECTIONS.map((section) => {
+            const isOpen = expanded === section.heading;
+            return (
+              <div key={section.heading} className="border-b border-white/10">
+                <button
+                  onClick={() =>
+                    setExpanded(isOpen ? null : section.heading)
+                  }
+                  className="w-full flex items-center justify-between py-4 text-left"
+                >
+                  <span className="text-[#FFC53A] text-[14px] font-medium">
+                    {section.heading}
+                  </span>
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    className="transition-transform duration-300 shrink-0"
+                    style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+                  >
+                    <path
+                      d="M4 6l4 4 4-4"
+                      stroke="white"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      opacity={0.6}
+                    />
+                  </svg>
+                </button>
+                <div
+                  className="grid transition-[grid-template-rows] duration-300 ease-out"
+                  style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
+                >
+                  <div className="overflow-hidden">
+                    <ul className="pb-4 space-y-2.5 pl-1">
+                      {section.links.map((link) => (
+                        <li key={link.label}>
+                          <Link
+                            href={link.href}
+                            className={`text-[14px] flex items-center gap-1.5 transition-colors ${
+                              link.highlight
+                                ? "text-[#FFC53A] hover:text-[#FFD161]"
+                                : "text-white/60 hover:text-white"
+                            }`}
+                          >
+                            {link.label}
+                            {link.external && (
+                              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="shrink-0">
+                                <path d="M3 9l6-6M4.5 3h4.5v4.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                              </svg>
+                            )}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Contact info */}
+        <div className="mt-6 space-y-3">
+          <a href="mailto:info@alsson.com" className="flex items-center gap-2 text-white/80 text-[14px]">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" className="shrink-0">
+              <rect x="2" y="4" width="16" height="12" rx="2" stroke="currentColor" strokeWidth="1.4" />
+              <path d="M2 6l8 5 8-5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            info@alsson.com
+          </a>
+          <a href="tel:01271155229" className="flex items-center gap-2 text-white/80 text-[14px]">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" className="shrink-0">
+              <path d="M3 4.5A1.5 1.5 0 014.5 3h2.1a1 1 0 01.95.68l.8 2.4a1 1 0 01-.27 1.03l-1.3 1.3a10.06 10.06 0 004.8 4.8l1.3-1.3a1 1 0 011.03-.27l2.4.8a1 1 0 01.68.95v2.1a1.5 1.5 0 01-1.5 1.5C8.94 17 3 11.06 3 4.5z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+            </svg>
+            01271155229 &bull; 01271155229
+          </a>
+        </div>
+
+        {/* Social icons */}
+        <div className="flex items-center justify-center gap-3 mt-6">
+          {[
+            { label: "Facebook", href: "#", icon: <path fill="currentColor" d="M10 2C5.58 2 2 5.58 2 10c0 3.95 2.87 7.23 6.63 7.85v-5.55H6.42V10h2.21V8.15c0-2.18 1.3-3.39 3.29-3.39.95 0 1.95.17 1.95.17v2.15h-1.1c-1.08 0-1.42.67-1.42 1.36V10h2.42l-.39 2.3h-2.03v5.55C15.13 17.23 18 13.95 18 10c0-4.42-3.58-8-8-8z" /> },
+            { label: "Instagram", href: "https://www.instagram.com/elalsson_Official", icon: <><rect x="3" y="3" width="14" height="14" rx="4" stroke="currentColor" strokeWidth="1.5" fill="none" /><circle cx="10" cy="10" r="3.5" stroke="currentColor" strokeWidth="1.5" fill="none" /><circle cx="14.5" cy="5.5" r="1" fill="currentColor" /></> },
+            { label: "X", href: "#", icon: <path d="M3 3l5.5 7L3 17h1.5l4.75-6.1L13.5 17H17l-5.75-7.35L16.5 3H15l-4.5 5.75L6.5 3H3z" fill="currentColor" /> },
+            { label: "LinkedIn", href: "#", icon: <><rect x="3" y="3" width="14" height="14" rx="2" stroke="currentColor" strokeWidth="1.3" fill="none" /><path d="M6.5 8.5v5M6.5 6v.01M9 13.5v-3c0-1.1.9-2 2-2s2 .9 2 2v3M9 8.5v5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" /></> },
+            { label: "YouTube", href: "#", icon: <><rect x="2" y="4.5" width="16" height="11" rx="3" stroke="currentColor" strokeWidth="1.3" fill="none" /><path d="M8.5 7.5l4 2.5-4 2.5z" fill="currentColor" /></> },
+          ].map((s) => (
+            <a
+              key={s.label}
+              href={s.href}
+              aria-label={s.label}
+              target={s.href.startsWith("http") ? "_blank" : undefined}
+              rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
+              className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center
+                         text-white/70 hover:bg-[#0089B7] hover:text-white transition-colors"
+            >
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                {s.icon}
+              </svg>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      {/* Bottom bar */}
+      <div className="bg-[#000E12] px-5 py-3">
+        <p className="text-[#A3A3A3] text-[12px] mb-1.5">
+          &copy; {new Date().getFullYear()} Alsson International Schools. All rights reserved.
+        </p>
+        <div className="flex flex-wrap gap-x-4 gap-y-1">
+          <Link href="/privacy" className="text-[#A3A3A3] text-[12px] hover:text-white/70 transition-colors">
+            Privacy policy
+          </Link>
+          <Link href="/terms" className="text-[#A3A3A3] text-[12px] hover:text-white/70 transition-colors">
+            Terms of service
+          </Link>
+          <Link href="/cookies" className="text-[#A3A3A3] text-[12px] hover:text-white/70 transition-colors">
+            Cookie settings
+          </Link>
+        </div>
+      </div>
+    </footer>
+  );
+}

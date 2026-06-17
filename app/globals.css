@@ -1,26 +1,301 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ─── Neo Sans Fonts (self-hosted) ───────────────────────────────────────────
+   Files copied from /Downloads/ into /public/fonts/
+   ─────────────────────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: "Neo Sans";
+  src: url("/fonts/NeoSansIntel.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neo Sans";
+  src: url("/fonts/NeoSansIntel-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neo Sans";
+  src: url("/fonts/Neo Sans Std Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Fonts */
+  --font-sans: "Neo Sans", system-ui, sans-serif;
+  --font-heading: "Neo Sans", system-ui, sans-serif;
+
+  /* ── Brand Colors ─────────────────────────────────────────── */
+  --color-brand:        #0089B7; /* Blue/500 — primary */
+  --color-accent:       #FFC53A; /* Yellow/500 — accent */
+
+  /* ── Blue Scale ───────────────────────────────────────────── */
+  --color-blue-25:      #F2F9FB;
+  --color-blue-50:      #E5F3F7;
+  --color-blue-100:     #CCE7F1;
+  --color-blue-200:     #99D0E2;
+  --color-blue-300:     #66B8D4;
+  --color-blue-400:     #33A1C5;
+  --color-blue-500:     #0089B7;
+  --color-blue-600:     #006E92;
+  --color-blue-700:     #00526E;
+  --color-blue-800:     #003749;
+  --color-blue-900:     #001B25;
+  --color-blue-950:     #000E12;
+
+  /* ── Yellow Scale ─────────────────────────────────────────── */
+  --color-yellow-25:    #FFFCF5;
+  --color-yellow-50:    #FFF9EB;
+  --color-yellow-100:   #FFF3D8;
+  --color-yellow-200:   #FFE8B0;
+  --color-yellow-300:   #FFDC89;
+  --color-yellow-400:   #FFD161;
+  --color-yellow-500:   #FFC53A;
+  --color-yellow-600:   #CC9E2E;
+  --color-yellow-700:   #997623;
+  --color-yellow-800:   #664F17;
+  --color-yellow-900:   #33270C;
+  --color-yellow-950:   #1A1406;
+
+  /* ── Neutral Scale ────────────────────────────────────────── */
+  --color-neutral-50:   #FAFAFA;
+  --color-neutral-100:  #F5F5F5;
+  --color-neutral-200:  #E5E5E5;
+  --color-neutral-300:  #D4D4D4;
+  --color-neutral-400:  #A3A3A3;
+  --color-neutral-500:  #737373;
+  --color-neutral-600:  #525252;
+  --color-neutral-700:  #262626;
+  --color-neutral-800:  #171717;
+  --color-neutral-900:  #0A0A0A;
+
+  /* ── Semantic Text ────────────────────────────────────────── */
+  --color-text-heading: #121212;
+  --color-text-body:    #252525;
+  --color-text-muted:   #737373;   /* Neutral/500 */
+  --color-text-on-dark: #FFFFFF;
+
+  /* ── Surfaces & Borders ───────────────────────────────────── */
+  --color-surface:          #FFFFFF;
+  --color-surface-secondary:#F1F1F1;
+  --color-border:           #F1F1F1;
+
+  /* ── Border Radius ────────────────────────────────────────── */
+  --radius-sm:   8px;    /* Corner Radius/200 */
+  --radius-pill: 40px;   /* Corner Radius/round — buttons, tags */
+
+  /* ── Type Scale — Headings (Neo Sans Std) ─────────────────── */
+  --text-h1: 60px;   --leading-h1: 72px;
+  --text-h2: 48px;   --leading-h2: 56px;
+  --text-h3: 40px;   --leading-h3: 48px;
+  --text-h4: 32px;   --leading-h4: 40px;
+  --text-h5: 28px;   --leading-h5: 36px;
+  --text-h6: 20px;   --leading-h6: 24px;
+
+  /* ── Type Scale — Body (Neo Sans Intel) ──────────────────── */
+  --text-p1: 24px;   --leading-p1: 28px;   /* medium weight */
+  --text-p2: 20px;   --leading-p2: 28px;
+  --text-p3: 18px;   --leading-p3: 20px;
+  --text-p4: 16px;   --leading-p4: 20px;
+  --text-p5: 14px;   --leading-p5: 20px;
+
+  /* ── Shadows ──────────────────────────────────────────────── */
+  --shadow-xxs: 0 1px 2px 0 rgba(0,0,0,0.05);
+  --shadow-xs:  0 1px 2px 0 rgba(0,0,0,0.06), 0 1px 3px 0 rgba(0,0,0,0.10);
+  --shadow-sm:  0 2px 4px -2px rgba(0,0,0,0.06), 0 4px 8px -2px rgba(0,0,0,0.10);
+  --shadow-md:  0 4px 6px -2px rgba(0,0,0,0.03), 0 12px 16px -4px rgba(0,0,0,0.08);
+  --shadow-lg:  0 8px 8px -4px rgba(0,0,0,0.03), 0 20px 24px -4px rgba(0,0,0,0.08);
+  --shadow-xl:  0 24px 48px -12px rgba(0,0,0,0.18);
+  --shadow-2xl: 0 32px 64px -12px rgba(0,0,0,0.14);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Base ──────────────────────────────────────────────────────────────────── */
+:root {
+  --background: #FFFFFF;
+  --foreground: #252525;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Neo Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Site-wide rule: minimum DOM text size is 12px. Inline SVG <text> uses
+     user units (not CSS px) and is exempt — see FileCard's PDF badge. */
+  font-size: 16px;
+}
+
+/* ─── Typography Utilities ───────────────────────────────────────────────────
+   Use these classes directly or via the components layer below.
+   ─────────────────────────────────────────────────────────────────────────── */
+@layer components {
+  .type-h1 { font-size: 60px; line-height: 72px; font-weight: 400; }
+  .type-h2 { font-size: 48px; line-height: 56px; font-weight: 400; }
+  .type-h3 { font-size: 40px; line-height: 48px; font-weight: 400; }
+  .type-h4 { font-size: 32px; line-height: 40px; font-weight: 400; }
+  .type-h5 { font-size: 28px; line-height: 36px; font-weight: 400; }
+  .type-h6 { font-size: 20px; line-height: 24px; font-weight: 400; }
+
+  /* Mobile-scaled headings (used in responsive views) */
+  .type-h1-mobile { font-size: 32px; line-height: 40px; font-weight: 400; }
+  .type-h2-mobile { font-size: 28px; line-height: 36px; font-weight: 400; }
+  .type-h3-mobile { font-size: 24px; line-height: 32px; font-weight: 400; }
+  .type-h4-mobile { font-size: 20px; line-height: 28px; font-weight: 400; }
+  .type-h5-mobile { font-size: 18px; line-height: 26px; font-weight: 400; }
+
+  .type-p1 { font-size: 24px; line-height: 28px; font-weight: 500; }
+  .type-p2 { font-size: 20px; line-height: 28px; font-weight: 400; }
+  .type-p3 { font-size: 18px; line-height: 20px; font-weight: 400; }
+  .type-p4 { font-size: 16px; line-height: 20px; font-weight: 400; }
+  .type-p5 { font-size: 14px; line-height: 20px; font-weight: 400; }
+
+  /* ── Buttons ─────────────────────────────────────────────────────────────── */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: #0089B7;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    white-space: nowrap;
+  }
+  .btn-primary:hover  { background: #006E92; }
+  .btn-primary:active { background: #00526E; }
+
+  .btn-accent {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: #FFC53A;
+    color: #121212;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    white-space: nowrap;
+  }
+  .btn-accent:hover  { background: #FFD161; }
+  .btn-accent:active { background: #CC9E2E; }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: transparent;
+    color: #0089B7;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    border-radius: 40px;
+    border: 1.5px solid #0089B7;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+  }
+  .btn-ghost:hover {
+    background: #0089B7;
+    color: #FFFFFF;
+  }
+
+  .btn-ghost-white {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: transparent;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    border-radius: 40px;
+    border: 1.5px solid rgba(255,255,255,0.6);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+  }
+  .btn-ghost-white:hover {
+    background: rgba(255,255,255,0.15);
+    border-color: #FFFFFF;
+  }
+
+  /* ── Tag / Chip ──────────────────────────────────────────────────────────── */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    border-radius: 40px;
+  }
+  .tag-blue    { background: #E5F3F7; color: #006E92; }
+  .tag-yellow  { background: #FFF3D8; color: #CC9E2E; }
+  .tag-outline { background: transparent; color: #0089B7; border: 1px solid #0089B7; }
+
+  /* ── Section wrapper ─────────────────────────────────────────────────────── */
+  .section-padding { padding-left: 20px; padding-right: 20px; }
+
+  /* ── Hide scrollbar (keep scroll functionality) ─────────────────────────── */
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+
+  /* ── Content swap fade (Story timeline, Mission/Vision toggle) ──────────── */
+  .story-slide { animation: story-slide-in 450ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+  /* ── Logo marquee (Accreditations) ──────────────────────────────────────── */
+  .marquee-track { display: flex; gap: 48px; width: max-content; animation: marquee 28s linear infinite; }
+  .marquee-track.reverse { animation-direction: reverse; }
+
+  /* ── Stage Facilities & Enrichment progress fill ────────────────────────── */
+  .stage-progress-fill {
+    height: 0;
+    animation: stage-progress-fill var(--ms, 4500ms) linear forwards;
+  }
+}
+
+@keyframes story-slide-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes stage-progress-fill {
+  from { height: 0; }
+  to   { height: var(--seg, 33.333%); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
 }
