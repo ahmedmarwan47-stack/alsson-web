@@ -6,33 +6,14 @@ const outDir = path.join(__dirname, 'out');
 
 function fixFile(filePath, ext) {
   let content = fs.readFileSync(filePath, 'utf8');
-  let changed = false;
+  const original = content;
 
-  if (ext === '.css') {
-    // Fix font and image URLs in CSS
-    const updated = content
-      .replace(/url\(["']?\/fonts\//g, `url(${basePath}/fonts/`)
-      .replace(/url\(["']?\/images\//g, `url(${basePath}/images/`);
-    if (updated !== content) { content = updated; changed = true; }
-  }
+  // Replace all occurrences of /images/ and /fonts/ with basePath prefix
+  // Use a negative lookbehind to avoid double-prefixing
+  content = content.replace(/(?<!\w)\/images\//g, `${basePath}/images/`);
+  content = content.replace(/(?<!\w)\/fonts\//g, `${basePath}/fonts/`);
 
-  if (ext === '.html') {
-    // Fix src="/images/ and href="/images/ in HTML
-    const updated = content
-      .replace(/(src|href)="\/images\//g, `$1="${basePath}/images/`)
-      .replace(/(src|href)="\/fonts\//g, `$1="${basePath}/fonts/`);
-    if (updated !== content) { content = updated; changed = true; }
-  }
-
-  if (ext === '.js') {
-    // Fix image paths in JS chunks
-    const updated = content
-      .replace(/"\/images\//g, `"${basePath}/images/`)
-      .replace(/'\/images\//g, `'${basePath}/images/`);
-    if (updated !== content) { content = updated; changed = true; }
-  }
-
-  if (changed) {
+  if (content !== original) {
     fs.writeFileSync(filePath, content, 'utf8');
     console.log(`Fixed: ${filePath}`);
   }
