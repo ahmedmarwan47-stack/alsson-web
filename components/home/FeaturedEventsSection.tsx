@@ -42,7 +42,7 @@ export default function FeaturedEventsSection() {
   return (
     <section
       className="section-padding py-12"
-      style={{ background: "linear-gradient(to bottom, #e0f8ff 12.4%, #fafafa 100%)" }}
+      style={{ background: "linear-gradient(to bottom, #E0F8FF 12.4%, #FAFAFA 100%)" }}
     >
       {/* Header */}
       <div className="flex items-center justify-between gap-3 mb-2">

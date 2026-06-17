@@ -68,7 +68,7 @@ export default function LeadershipPage() {
           <img
             src="/images/sl-leadership-hero.jpg"
             alt="Empowering tomorrow's leaders at El Alsson"
-            className="absolute inset-0 w-full h-full object-cover object-center"
+            className="absolute inset-0 w-full h-full object-cover object-center hero-image-zoom"
           />
         </div>
       </section>

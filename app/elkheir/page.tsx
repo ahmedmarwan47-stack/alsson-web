@@ -142,7 +142,7 @@ export default function ElKheirPage() {
           <img
             src="/images/elkheir-hero.jpg"
             alt="El Alsson students at a charity field day"
-            className="absolute inset-0 w-full h-full object-cover object-center"
+            className="absolute inset-0 w-full h-full object-cover object-center hero-image-zoom"
           />
         </div>
       </section>

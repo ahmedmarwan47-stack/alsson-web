@@ -26,27 +26,25 @@ export default function LifePage() {
     <div className="flex flex-col">
 
       {/* ── 1. Hero ─────────────────────────────────────────────────────────── */}
-      <section className="bg-[#F2F9FB] pt-12">
+      <section className="bg-[#F2F9FB]">
         <ScrollReveal>
-          <div className="section-padding flex flex-col items-center text-center gap-5 pb-8">
+          <div className="section-padding pt-8 pb-7 text-center">
             {/* Pill */}
-            <div style={{ marginBottom: "-4px" }}>
-              <span
-                className="inline-block bg-[#FFE8B0] text-[#1A1406] text-[14px] rounded-md px-3 py-1"
-                style={{ transform: "rotate(-2deg)", fontWeight: 400 }}
-              >
-                Life At El‑Alsson
-              </span>
-            </div>
+            <span
+              className="inline-block -rotate-2 bg-[#FFE8B0] text-[#1A1406] text-[12px] px-3 py-1 rounded-md mb-1"
+              style={{ fontWeight: 400 }}
+            >
+              Life At El‑Alsson
+            </span>
 
             <h1
-              className="text-[#0A0A0A]"
-              style={{ fontSize: "32px", lineHeight: "1.2", fontWeight: 500 }}
+              className="text-[#0A0A0A] mb-3"
+              style={{ fontSize: "32px", lineHeight: "1.15", fontWeight: 500 }}
             >
               Teach. Inspire, Call It Home.
             </h1>
 
-            <p className="text-[#525252] text-[16px] leading-[1.6]">
+            <p className="text-[#525252] text-[16px] leading-[1.55] mb-6">
               Join a passionate family of international educators at our flagship 14-acre campus
               in New Giza. Experience a career that enriches both you and your students as nothing
               compares to the community at El-Alsson.
@@ -54,22 +52,24 @@ export default function LifePage() {
 
             <Link
               href="/admissions#tour"
-              className="w-full flex items-center justify-center rounded-full border border-[#262626] text-[#262626] text-[15px] font-medium active:bg-[#F5F5F5] transition-colors"
+              className="w-full flex items-center justify-center rounded-full border border-[#262626] text-[#262626] text-[14px] font-medium tracking-[0.05em] uppercase active:bg-white/60 transition-colors"
               style={{ height: "52px" }}
             >
-              START VIRTUAL TOUR
+              Start Virtual Tour
             </Link>
           </div>
         </ScrollReveal>
 
         {/* Full-bleed hero photo */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/images/life-hero.jpg"
-          alt="Life at El Alsson campus"
-          className="w-full block object-cover"
-          style={{ height: "240px" }}
-        />
+        <div className="w-full overflow-hidden">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/life-hero.jpg"
+            alt="Life at El Alsson campus"
+            className="w-full block object-cover hero-image-zoom"
+            style={{ height: "240px" }}
+          />
+        </div>
       </section>
 
       {/* ── 2. The New Giza Experience ──────────────────────────────────────── */}

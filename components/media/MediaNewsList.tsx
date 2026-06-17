@@ -460,9 +460,9 @@ export default function MediaNewsList() {
       {/* ── Hero + tabs + featured card ─────────────────────── */}
       <section className="bg-[#F2F9FB] section-padding pt-8 pb-10">
         <ScrollReveal>
-          <div className="flex justify-center mb-2">
+          <div className="text-center mb-1">
             <span
-              className="-rotate-2 inline-block bg-[#FFE8B0] text-[#1A1406] px-3 py-0.5 rounded-md text-[13px]"
+              className="inline-block -rotate-2 bg-[#FFE8B0] text-[#1A1406] text-[12px] px-3 py-1 rounded-md"
               style={{ fontWeight: 400 }}
             >
               Stories
@@ -471,7 +471,7 @@ export default function MediaNewsList() {
 
           <h1
             className="text-[#0A0A0A] text-center mb-3"
-            style={{ fontSize: "28px", lineHeight: "1.2", fontWeight: 500 }}
+            style={{ fontSize: "32px", lineHeight: "1.15", fontWeight: 500 }}
           >
             Latest Media &amp; News
             <br />

@@ -59,21 +59,19 @@ export default function AmericanSchoolPage() {
       >
         <div className="section-padding pt-8 pb-6 flex flex-col items-center text-center">
           <ScrollReveal>
-            <div className="inline-block -rotate-2 mb-2">
-              <span
-                className="inline-block bg-[#FFE8B0] text-[#1A1406] rounded-md px-3 py-1"
-                style={{ fontSize: "15px", fontWeight: 400 }}
-              >
-                American School
-              </span>
-            </div>
+            <span
+              className="inline-block -rotate-2 bg-[#FFE8B0] text-[#1A1406] text-[12px] px-3 py-1 rounded-md mb-1"
+              style={{ fontWeight: 400 }}
+            >
+              American School
+            </span>
             <h1
-              className="text-[#0A0A0A]"
-              style={{ fontSize: "32px", lineHeight: 1.2, fontWeight: 500 }}
+              className="text-[#0A0A0A] mb-3"
+              style={{ fontSize: "32px", lineHeight: "1.15", fontWeight: 500 }}
             >
               American Education Redefined
             </h1>
-            <p className="text-[#525252] text-[15px] leading-[1.6] mt-3 max-w-[360px] mx-auto">
+            <p className="text-[#525252] text-[16px] leading-[1.55] max-w-[360px] mx-auto">
               A rigorous, student-centered curriculum aligned with AERO standards,
               preparing students for global universities through AP courses.
             </p>
@@ -82,31 +80,36 @@ export default function AmericanSchoolPage() {
           <ScrollReveal delay={100} className="w-full self-stretch">
             <div className="flex flex-col gap-3 w-full mt-6">
               <Link
-                href="/admissions"
-                className="w-full flex items-center justify-center gap-2 rounded-full bg-[#0089B7] text-white text-[15px] font-medium active:bg-[#006E92] transition-colors"
+                href="/admissions/apply"
+                className="w-full flex items-center justify-center rounded-full
+                           bg-[#0089B7] text-white text-[14px] font-medium tracking-[0.05em] uppercase
+                           active:bg-[#006E92] transition-colors"
                 style={{ height: "52px", boxShadow: "0px 4px 8px 0px rgba(0,0,0,0.2)" }}
               >
-                APPLY NOW
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                Apply Now
               </Link>
               <Link
-                href="#"
-                className="w-full flex items-center justify-center rounded-full border border-[#262626] text-[#262626] text-[15px] font-medium active:bg-[#F5F5F5] transition-colors"
+                href="/admissions#tour"
+                className="w-full flex items-center justify-center rounded-full
+                           border border-[#262626] text-[#262626] text-[14px] font-medium tracking-[0.05em] uppercase
+                           active:bg-white/60 transition-colors"
                 style={{ height: "52px" }}
               >
-                START VIRTUAL TOUR
+                Start Virtual Tour
               </Link>
             </div>
           </ScrollReveal>
         </div>
 
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/images/american-hero.jpg"
-          alt="American School students"
-          className="w-full flex-1 object-cover"
-          style={{ minHeight: "240px" }}
-        />
+        <div className="w-full flex-1 overflow-hidden relative" style={{ minHeight: "240px" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/american-hero.jpg"
+            alt="American School students"
+            className="absolute inset-0 w-full h-full object-cover object-center hero-image-zoom"
+          />
+        </div>
       </section>
 
       {/* ── Stats ────────────────────────────────────────────────── */}

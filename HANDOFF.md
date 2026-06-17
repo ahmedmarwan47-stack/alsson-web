@@ -7,7 +7,7 @@ Mobile-responsive website for **El Alsson International Schools** built from Fig
 - **Stack:** Next.js (App Router) · TypeScript · Tailwind CSS v4 · `@import "tailwindcss"` + `@theme inline` in `app/globals.css`
 - **Fonts:** Self-hosted Neo Sans (`/public/fonts/`) — 400 (`NeoSansIntel.ttf`), 500 (`NeoSansIntel-Medium.ttf`), 700 (`Neo Sans Std Bold.otf`)
 - **Dev server:** `npm run dev --port 3001` via `.claude/launch.json` (server name: `alsson-web`)
-- **Preview:** `http://localhost:3001`
+- **Preview:** `http://localhost:3001` (no basePath in dev — pages are at root, e.g. `http://localhost:3001/calendar`)
 - **Source assets folder:** `/Users/ahmed/Downloads/Alsson Imagery/` — extra PNGs (`ea.png`, `44.png`, `full logo.png`, `image 1963.png`, `parentsapp.png`, etc.) get copied into `public/images/` with URL-safe names
 
 ---
@@ -67,6 +67,26 @@ Body: Neo Sans Regular (400). Headings: Neo Sans Medium (500) for soft, Bold (70
 **Exception:** Decorative icon backplates (colored chips behind icons) can be 40px — the *container*, not the SVG inside.
 
 **Why:** Icons larger than 24px steal visual weight from accompanying text. This was discovered when the PDF icon was 32px and crowded the file card titles.
+
+### Inline icon–text alignment rule
+**Rule: For plain icon-and-text rows (info banners, feature rows, contact lines, etc.), the icon's `width` and `height` must equal the text's `lineHeight` in px.**
+
+```tsx
+// ✅ correct — 20px icon, 20px line-height
+<div className="flex items-start gap-2">
+  <svg width="20" height="20" …/>
+  <p style={{ fontSize: "13px", lineHeight: "20px" }}>Text</p>
+</div>
+
+// ❌ wrong — 20px icon but 1.35 × 13px = 17.5px line-height → icon overshoots, text floats high
+<svg width="20" height="20" …/>
+<p style={{ fontSize: "13px", lineHeight: "1.35" }}>Text</p>
+```
+
+- Always express `lineHeight` as an **absolute px value** (not a unitless multiplier) when pairing with an icon, so the two measurements are comparable.
+- Use `items-start` for multi-line text (so the icon aligns with the first line); `items-center` only for guaranteed single-line strings.
+- Never add `mt-0.5` / `mt-1` nudges to compensate — those are a sign the sizes don't match. Fix the sizes instead.
+- This rule applies to **plain inline rows only**. Large decorative icon backplates (40px containers) and card-header icons are exempt.
 
 ### Hero Pill Pattern
 Category pill at top of inner pages (e.g. "Admissions", "Academics"):

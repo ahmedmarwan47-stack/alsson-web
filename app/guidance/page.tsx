@@ -109,7 +109,7 @@ export default function GuidancePage() {
           <img
             src="/images/guidance-hero.jpg"
             alt="El Alsson students with a school counselor"
-            className="absolute inset-0 w-full h-full object-cover object-center"
+            className="absolute inset-0 w-full h-full object-cover object-center hero-image-zoom"
           />
         </div>
       </section>

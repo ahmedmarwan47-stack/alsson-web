@@ -116,7 +116,7 @@ export default function SportsPage() {
           <img
             src="/images/sl-sports-hero.jpg"
             alt="Championing health and excellence at El Alsson"
-            className="absolute inset-0 w-full h-full object-cover object-center"
+            className="absolute inset-0 w-full h-full object-cover object-center hero-image-zoom"
           />
         </div>
       </section>

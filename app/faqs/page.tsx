@@ -15,23 +15,16 @@ export default function FAQsPage() {
       <section className="bg-[#FAFAFA] section-padding pt-10 pb-8 text-center">
         <ScrollReveal>
           {/* Category pill */}
-          <div className="inline-flex mb-4">
-            <span
-              className="inline-block text-[12px] font-medium px-3 py-1 rounded-md"
-              style={{
-                background: "#FFE8B0",
-                color: "#1A1406",
-                transform: "rotate(-2deg)",
-                fontWeight: 400,
-              }}
-            >
-              Questions
-            </span>
-          </div>
+          <span
+            className="inline-block -rotate-2 bg-[#FFE8B0] text-[#1A1406] text-[12px] px-3 py-1 rounded-md mb-1"
+            style={{ fontWeight: 400 }}
+          >
+            Questions
+          </span>
 
           <h1
             className="text-[#0A0A0A]"
-            style={{ fontSize: "32px", lineHeight: "1.2", fontWeight: 500 }}
+            style={{ fontSize: "32px", lineHeight: "1.15", fontWeight: 500 }}
           >
             Frequently Asked
             <br />

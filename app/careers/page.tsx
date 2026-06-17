@@ -14,54 +14,51 @@ export default function CareersPage() {
     <div className="flex flex-col">
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="bg-[#F2F9FB] section-padding pt-12 pb-10">
+      <section className="bg-[#F2F9FB] section-padding pt-8 pb-10 text-center">
         <ScrollReveal>
-          <div className="flex flex-col items-center text-center gap-6">
-            {/* Pill */}
-            <div className="flex items-center justify-center" style={{ marginBottom: "-4px" }}>
-              <span
-                className="inline-block bg-[#FFE8B0] text-[#1A1406] text-[14px] rounded-md px-3 py-1"
-                style={{ transform: "rotate(-2deg)", fontWeight: 400 }}
-              >
-                Join Our Team
-              </span>
-            </div>
+          {/* Pill */}
+          <span
+            className="inline-block -rotate-2 bg-[#FFE8B0] text-[#1A1406] text-[12px] px-3 py-1 rounded-md mb-1"
+            style={{ fontWeight: 400 }}
+          >
+            Join Our Team
+          </span>
 
-            {/* Heading */}
-            <h1
-              className="text-[#0A0A0A]"
-              style={{ fontSize: "32px", lineHeight: "1.2", fontWeight: 500 }}
-            >
-              Open Positions At El Alsson
-            </h1>
+          {/* Heading */}
+          <h1
+            className="text-[#0A0A0A] mb-3"
+            style={{ fontSize: "32px", lineHeight: "1.15", fontWeight: 500 }}
+          >
+            Open Positions At El Alsson
+          </h1>
 
-            {/* Lead */}
-            <p className="text-[#525252] text-[16px] leading-[1.6] max-w-[560px]">
-              Explore rewarding opportunities within a collaborative international school community
-              where educators grow, inspire, and make a lasting impact.
-            </p>
+          {/* Lead */}
+          <p className="text-[#525252] text-[16px] leading-[1.55] mb-6 max-w-[560px] mx-auto">
+            Explore rewarding opportunities within a collaborative international school community
+            where educators grow, inspire, and make a lasting impact.
+          </p>
 
-            {/* CTAs */}
-            <div className="flex flex-col gap-3 w-full">
+          {/* CTAs */}
+          <div className="flex flex-col gap-3 w-full">
               <a
                 href="#positions"
-                className="w-full flex items-center justify-center gap-2 rounded-full bg-[#0089B7] text-white text-[15px] font-medium active:bg-[#006E92] transition-colors"
+                className="w-full flex items-center justify-center rounded-full
+                           bg-[#0089B7] text-white text-[14px] font-medium tracking-[0.05em] uppercase
+                           active:bg-[#006E92] transition-colors"
                 style={{ height: "52px", boxShadow: "0px 4px 8px 0px rgba(0,0,0,0.2)" }}
               >
                 View Open Positions
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
               </a>
               <Link
-                href="/about"
-                className="w-full flex items-center justify-center rounded-full border border-[#262626] text-[#262626] text-[15px] font-medium active:bg-[#F5F5F5] transition-colors"
+                href="/admissions#tour"
+                className="w-full flex items-center justify-center rounded-full
+                           border border-[#262626] text-[#262626] text-[14px] font-medium tracking-[0.05em] uppercase
+                           active:bg-white/60 transition-colors"
                 style={{ height: "52px" }}
               >
                 Start Virtual Tour
               </Link>
             </div>
-          </div>
         </ScrollReveal>
       </section>
 

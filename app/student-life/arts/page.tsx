@@ -101,7 +101,7 @@ export default function ArtsPage() {
           <img
             src="/images/sl-arts-hero.jpg"
             alt="Cultivating creative minds at El Alsson"
-            className="absolute inset-0 w-full h-full object-cover object-center"
+            className="absolute inset-0 w-full h-full object-cover object-center hero-image-zoom"
           />
         </div>
       </section>

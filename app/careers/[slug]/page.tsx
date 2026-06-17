@@ -35,47 +35,43 @@ export default async function SingleCareerPage({
     <div className="flex flex-col">
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="bg-[#F2F9FB] section-padding pt-12 pb-10">
-        <div className="flex flex-col items-center text-center gap-5">
-          {/* Pill */}
-          <div className="flex items-center justify-center" style={{ marginBottom: "-4px" }}>
-            <span
-              className="inline-block bg-[#FFE8B0] text-[#1A1406] text-[14px] rounded-md px-3 py-1"
-              style={{ transform: "rotate(-2deg)", fontWeight: 400 }}
-            >
-              Job Details
-            </span>
-          </div>
+      <section className="bg-[#F2F9FB] section-padding pt-8 pb-10 text-center">
+        {/* Pill */}
+        <span
+          className="inline-block -rotate-2 bg-[#FFE8B0] text-[#1A1406] text-[12px] px-3 py-1 rounded-md mb-1"
+          style={{ fontWeight: 400 }}
+        >
+          Job Details
+        </span>
 
-          {/* Job title */}
-          <h1
-            className="text-[#0A0A0A]"
-            style={{ fontSize: "28px", lineHeight: "1.2", fontWeight: 500 }}
-          >
-            {job.title}
-          </h1>
+        {/* Job title */}
+        <h1
+          className="text-[#0A0A0A] mb-3"
+          style={{ fontSize: "32px", lineHeight: "1.15", fontWeight: 500 }}
+        >
+          {job.title}
+        </h1>
 
-          {/* Meta row */}
-          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
-            <span className="text-[#00526E] text-[14px]">{job.school}</span>
-            <span className="w-1 h-1 rounded-full bg-[#00526E] shrink-0" />
-            <span className="text-[#00526E] text-[14px]">{job.type}</span>
-            <span className="w-1 h-1 rounded-full bg-[#00526E] shrink-0" />
-            <span className="text-[#00526E] text-[14px]">{job.posted}</span>
-          </div>
-
-          {/* Apply CTA */}
-          <a
-            href={`mailto:vacancies@alsson.com?subject=Application — ${job.title}`}
-            className="w-full flex items-center justify-center gap-2 rounded-full bg-[#0089B7] text-white text-[15px] font-medium active:bg-[#006E92] transition-colors"
-            style={{ height: "52px", boxShadow: "0px 4px 8px 0px rgba(0,0,0,0.2)" }}
-          >
-            APPLY NOW
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </a>
+        {/* Meta row */}
+        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 mb-6">
+          <span className="text-[#00526E] text-[14px]">{job.school}</span>
+          <span className="w-1 h-1 rounded-full bg-[#00526E] shrink-0" />
+          <span className="text-[#00526E] text-[14px]">{job.type}</span>
+          <span className="w-1 h-1 rounded-full bg-[#00526E] shrink-0" />
+          <span className="text-[#00526E] text-[14px]">{job.posted}</span>
         </div>
+
+        {/* Apply CTA */}
+        <a
+          href={`mailto:vacancies@alsson.com?subject=Application — ${job.title}`}
+          className="w-full flex items-center justify-center gap-2 rounded-full bg-[#0089B7] text-white text-[14px] font-medium tracking-[0.05em] uppercase active:bg-[#006E92] transition-colors"
+          style={{ height: "52px", boxShadow: "0px 4px 8px 0px rgba(0,0,0,0.2)" }}
+        >
+          Apply Now
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </a>
       </section>
 
       {/* ── Sticky sub-header ─────────────────────────────────────────────── */}

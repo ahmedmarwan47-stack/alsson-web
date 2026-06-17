@@ -154,7 +154,7 @@ export default function ParentsPage() {
           <img
             src="/images/parents-hero.jpg"
             alt="El Alsson parents and students together on campus"
-            className="absolute inset-0 w-full h-full object-cover object-center"
+            className="absolute inset-0 w-full h-full object-cover object-center hero-image-zoom"
           />
         </div>
       </section>

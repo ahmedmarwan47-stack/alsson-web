@@ -75,7 +75,7 @@ export default function HomePage() {
           src="/images/hero-bg.jpg"
           alt=""
           aria-hidden
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          className="absolute inset-0 w-full h-full object-cover object-center hero-image-zoom"
         />
         <div
           className="absolute inset-0"

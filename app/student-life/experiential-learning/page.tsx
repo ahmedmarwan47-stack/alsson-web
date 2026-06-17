@@ -230,7 +230,7 @@ export default function ExperientialLearningPage() {
           <img
             src="/images/sl-exp-hero.jpg"
             alt="Learning beyond the classroom at El Alsson"
-            className="absolute inset-0 w-full h-full object-cover object-center"
+            className="absolute inset-0 w-full h-full object-cover object-center hero-image-zoom"
           />
         </div>
       </section>

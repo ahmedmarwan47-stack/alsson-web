@@ -14,22 +14,15 @@ export default function ContactPage() {
       {/* Hero */}
       <section className="bg-[#F2F9FB] section-padding pt-10 pb-10 text-center">
         <ScrollReveal>
-          <div className="inline-flex mb-4">
-            <span
-              className="inline-block text-[12px] font-medium px-3 py-1 rounded-md"
-              style={{
-                background: "#FFE8B0",
-                color: "#1A1406",
-                transform: "rotate(-2deg)",
-                fontWeight: 400,
-              }}
-            >
-              Contact Us
-            </span>
-          </div>
+          <span
+            className="inline-block -rotate-2 bg-[#FFE8B0] text-[#1A1406] text-[12px] px-3 py-1 rounded-md mb-1"
+            style={{ fontWeight: 400 }}
+          >
+            Contact Us
+          </span>
           <h1
             className="text-[#0A0A0A]"
-            style={{ fontSize: "32px", lineHeight: "1.2", fontWeight: 500 }}
+            style={{ fontSize: "32px", lineHeight: "1.15", fontWeight: 500 }}
           >
             Get in{" "}
             <span style={{ color: "#0089B7", fontWeight: 700 }}>Touch</span>

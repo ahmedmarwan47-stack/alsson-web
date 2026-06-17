@@ -82,8 +82,8 @@ export default function FacilitiesPage() {
         <ScrollReveal>
           <div className="section-padding pt-8 pb-7 text-center">
             <span
-              className="inline-block -rotate-2 bg-[#FFE8B0] text-[#1A1406] px-3 py-1 rounded-md mb-1"
-              style={{ fontWeight: 400, fontSize: "13px" }}
+              className="inline-block -rotate-2 bg-[#FFE8B0] text-[#1A1406] text-[12px] px-3 py-1 rounded-md mb-1"
+              style={{ fontWeight: 400 }}
             >
               Facilities
             </span>
@@ -123,7 +123,7 @@ export default function FacilitiesPage() {
           <img
             src="/images/facilities-hero.jpg"
             alt="El Alsson students performing on stage"
-            className="absolute inset-0 w-full h-full object-cover object-center"
+            className="absolute inset-0 w-full h-full object-cover object-center hero-image-zoom"
           />
         </div>
       </section>

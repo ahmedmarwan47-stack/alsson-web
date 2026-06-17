@@ -93,7 +93,7 @@ export default function AlumniPage() {
           <img
             src="/images/alumni-hero.jpg"
             alt="El Alsson alumni gathered at a reunion"
-            className="absolute inset-0 w-full h-full object-cover object-center"
+            className="absolute inset-0 w-full h-full object-cover object-center hero-image-zoom"
           />
         </div>
       </section>

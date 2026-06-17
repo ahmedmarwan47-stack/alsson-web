@@ -261,7 +261,7 @@ export default function AdmissionsPage() {
           <img
             src="/images/admissions-hero.jpg"
             alt="El Alsson students at lunch"
-            className="absolute inset-0 w-full h-full object-cover object-center"
+            className="absolute inset-0 w-full h-full object-cover object-center hero-image-zoom"
           />
         </div>
       </section>
