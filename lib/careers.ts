@@ -1,9 +1,24 @@
+export type CareerCategory =
+  | "Education"
+  | "Administration"
+  | "Teaching Assistant"
+  | "Talent Pool";
+
+export const CAREER_CATEGORIES: CareerCategory[] = [
+  "Education",
+  "Administration",
+  "Teaching Assistant",
+  "Talent Pool",
+];
+
 export interface CareerPosition {
   slug: string;
   title: string;
+  category: CareerCategory;
   school: string;
   type: string;
   posted: string;
+  closes: string;
   callout: {
     heading: string;
     body: string;
@@ -17,9 +32,11 @@ export const CAREERS: CareerPosition[] = [
   {
     slug: "accounting-teacher-british-2026",
     title: "Accounting Teacher — British School 2026/2027",
+    category: "Education",
     school: "British School",
     type: "Full-time Permanent",
     posted: "Posted Apr 10, 2026",
+    closes: "Closes May 10, 2026",
     callout: {
       heading: "Interviews will take place on a rolling basis, following receipt of applications.",
       body: "Please email your CV",
@@ -52,9 +69,11 @@ export const CAREERS: CareerPosition[] = [
   {
     slug: "math-teacher-american-2026",
     title: "Mathematics Teacher — American School 2026/2027",
+    category: "Education",
     school: "American School",
     type: "Full-time Permanent",
     posted: "Posted Apr 8, 2026",
+    closes: "Closes May 8, 2026",
     callout: {
       heading: "Interviews will take place on a rolling basis, following receipt of applications.",
       body: "Please email your CV",
@@ -87,9 +106,11 @@ export const CAREERS: CareerPosition[] = [
   {
     slug: "science-teacher-british-2026",
     title: "Science Teacher — British School 2026/2027",
+    category: "Education",
     school: "British School",
     type: "Full-time Permanent",
     posted: "Posted Apr 5, 2026",
+    closes: "Closes May 5, 2026",
     callout: {
       heading: "Interviews will take place on a rolling basis, following receipt of applications.",
       body: "Please email your CV",
@@ -122,9 +143,11 @@ export const CAREERS: CareerPosition[] = [
   {
     slug: "english-teacher-american-2026",
     title: "English Language Arts Teacher — American School 2026/2027",
+    category: "Education",
     school: "American School",
     type: "Full-time Permanent",
     posted: "Posted Apr 1, 2026",
+    closes: "Closes May 1, 2026",
     callout: {
       heading: "Interviews will take place on a rolling basis, following receipt of applications.",
       body: "Please email your CV",

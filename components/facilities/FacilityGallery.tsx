@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 
 export type Album = {
   img: string;
-  label: "Junior" | "Senior";
+  pill: string;
   count: string;
 };
 
@@ -37,37 +37,24 @@ function AlbumIcon() {
 }
 
 function AlbumCard({ album }: { album: Album }) {
-  const pillDark = album.label === "Junior";
   return (
     <a
       href="#"
       className="relative shrink-0 h-[320px] rounded-[12px] overflow-hidden
-                 flex flex-col justify-between p-3 active:opacity-90"
+                 flex flex-col justify-start p-3 active:opacity-90"
       style={{ width: `${CARD_W}px` }}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={album.img}
-        alt={`${album.label} photo album`}
+        alt={album.pill}
         className="absolute inset-0 w-full h-full object-cover object-center"
       />
       <span
-        className={`relative self-start px-3 py-0.5 rounded-full font-medium ${
-          pillDark ? "bg-[#00526E] text-white" : "bg-[#FFC53A] text-black"
-        }`}
-        style={{ fontSize: "12px" }}
+        className="relative self-start inline-flex items-center px-2.5 py-0.5 rounded-full font-normal max-w-[calc(100%-12px)] whitespace-nowrap overflow-hidden text-ellipsis"
+        style={{ fontSize: "12px", background: "#FFC53A", color: "#000" }}
       >
-        {album.label}
-      </span>
-      <span
-        className="relative self-end flex items-center gap-1.5 bg-[#0089B7] rounded-full pl-0.5 pr-2.5 py-0.5"
-      >
-        <span className="w-6 h-6 rounded-full bg-[#003749] flex items-center justify-center">
-          <AlbumIcon />
-        </span>
-        <span className="text-white" style={{ fontSize: "12px" }}>
-          {album.count}
-        </span>
+        {album.pill}
       </span>
     </a>
   );
@@ -88,13 +75,7 @@ export default function FacilityGallery({ id, eyebrow, title, lead, albums }: Fa
   }
 
   return (
-    <section id={id} className="bg-[#FAFAFA] section-padding py-12">
-      <span
-        className="inline-block bg-[#FFE8B0] text-[#1A1406] px-2.5 py-0.5 rounded-md mb-3"
-        style={{ fontWeight: 400, fontSize: "13px" }}
-      >
-        {eyebrow}
-      </span>
+    <section id={id} className="bg-[#FAFAFA] section-padding py-8">
       <h2
         className="text-[#171717] mb-2"
         style={{ fontSize: "28px", lineHeight: "1.2", fontWeight: 500 }}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ScrollReveal from "@/components/home/ScrollReveal";
-import { CAREERS } from "@/lib/careers";
+import CareersList from "@/components/careers/CareersList";
 
 export const metadata: Metadata = {
   title: "Careers — El Alsson International Schools",
@@ -72,38 +72,7 @@ export default function CareersPage() {
           </h2>
         </ScrollReveal>
 
-        <div className="flex flex-col divide-y divide-[#E5E5E5]">
-          {CAREERS.map((job, i) => (
-            <ScrollReveal key={job.slug} delay={i * 80}>
-              <Link
-                href={`/careers/${job.slug}`}
-                className="flex items-start justify-between gap-4 py-6 group"
-              >
-                <div className="flex flex-col gap-2 flex-1">
-                  <p
-                    className="text-[#0A0A0A] group-active:text-[#0089B7] transition-colors"
-                    style={{ fontSize: "18px", lineHeight: "1.4", fontWeight: 700 }}
-                  >
-                    {job.title}
-                  </p>
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                    <span className="text-[#00526E] text-[13px]">{job.school}</span>
-                    <span className="w-1 h-1 rounded-full bg-[#00526E] shrink-0" />
-                    <span className="text-[#00526E] text-[13px]">{job.type}</span>
-                    <span className="w-1 h-1 rounded-full bg-[#00526E] shrink-0" />
-                    <span className="text-[#00526E] text-[13px]">{job.posted}</span>
-                  </div>
-                </div>
-                <div className="flex items-center gap-1.5 shrink-0 mt-1">
-                  <span className="text-[#262626] text-[14px] font-medium">More Details</span>
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M3 13L13 3M13 3H6M13 3V10" stroke="#262626" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </div>
-              </Link>
-            </ScrollReveal>
-          ))}
-        </div>
+        <CareersList />
       </section>
 
       {/* ── Life At El Alsson ─────────────────────────────────────────────── */}

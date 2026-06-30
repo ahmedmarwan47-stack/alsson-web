@@ -4,8 +4,11 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X, ChevronDown } from "lucide-react";
 
+type NavChild = { label: string; href: string; children?: NavChild[] };
+type NavItem = { label: string; href: string; children?: NavChild[] };
+
 // Primary nav — matches Figma main navbar order exactly
-const PRIMARY_NAV = [
+const PRIMARY_NAV: NavItem[] = [
   {
     label: "About",
     href: "/about",
@@ -22,12 +25,38 @@ const PRIMARY_NAV = [
     label: "Academics",
     href: "/academics/american",
     children: [
-      { label: "American School", href: "/academics/american" },
-      { label: "Early Childhood (PreS – PreK)", href: "/academics/american/pre-school" },
-      { label: "Kindergarten & Grade 1", href: "/academics/american/kindergarten" },
-      { label: "Elementary (Grades 2–5)", href: "/academics/american/elementary" },
-      { label: "Middle School (Grades 6–8)", href: "/academics/american/middle-school" },
-      { label: "High School (Grades 9–12)", href: "/academics/american/high-school" },
+      {
+        label: "American School",
+        href: "/academics/american",
+        children: [
+          { label: "Explore American School", href: "/academics/american" },
+          { label: "Early Childhood (PreS – PreK)", href: "/academics/american/pre-school" },
+          { label: "Kindergarten & Grade 1", href: "/academics/american/kindergarten" },
+          { label: "Elementary (Grades 2–5)", href: "/academics/american/elementary" },
+          { label: "Middle School (Grades 6–8)", href: "/academics/american/middle-school" },
+          { label: "High School (Grades 9–12)", href: "/academics/american/high-school" },
+        ],
+      },
+      {
+        label: "British School",
+        href: "/academics/british",
+        children: [
+          { label: "Explore British School", href: "/academics/british" },
+          { label: "Early Years (FS1 – FS2)", href: "/academics/british/early-years" },
+          { label: "Primary (Years 1–6)", href: "/academics/british/primary" },
+          { label: "Secondary (Years 7–11)", href: "/academics/british/secondary" },
+          { label: "Sixth Form (Years 12–13)", href: "/academics/british/sixth-form" },
+        ],
+      },
+      {
+        label: "IB Diploma Programme",
+        href: "/academics/ibdp",
+        children: [
+          { label: "Explore IBDP", href: "/academics/ibdp" },
+          { label: "IBDP Year 1", href: "/academics/ibdp/year-1" },
+          { label: "IBDP Year 2", href: "/academics/ibdp/year-2" },
+        ],
+      },
     ],
   },
   {
@@ -82,6 +111,7 @@ const UTILITY_LINKS = [
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
+  const [expandedSubItem, setExpandedSubItem] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -98,6 +128,7 @@ export default function Navbar() {
     } else {
       document.body.style.overflow = "";
       setExpandedItem(null);
+      setExpandedSubItem(null);
     }
   }, [menuOpen]);
 
@@ -183,21 +214,50 @@ export default function Navbar() {
                   {hasChildren && (
                     <div
                       className={`absolute top-full left-0 mt-1 bg-white rounded-xl shadow-xl border border-black/5
-                        min-w-[200px] py-2 transition-all duration-150
+                        min-w-[220px] py-2 transition-all duration-150
                         ${isOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-1 pointer-events-none"}`}
                       onMouseEnter={() => openDropdown(item.label)}
                       onMouseLeave={closeDropdown}
                     >
-                      {item.children!.map((child) => (
-                        <Link
-                          key={child.label}
-                          href={child.href}
-                          className="block px-4 py-2.5 text-[13px] text-[#262626] hover:bg-[#F0F9FC] hover:text-[#0089B7] transition-colors"
-                          onClick={() => setActiveDropdown(null)}
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
+                      {item.children!.map((child) =>
+                        child.children && child.children.length > 0 ? (
+                          <div key={child.label} className="relative group/sub">
+                            <div className="flex items-center justify-between px-4 py-2.5 text-[13px] text-[#262626] hover:bg-[#F0F9FC] hover:text-[#0089B7] transition-colors cursor-default">
+                              <Link
+                                href={child.href}
+                                className="flex-1"
+                                onClick={() => setActiveDropdown(null)}
+                              >
+                                {child.label}
+                              </Link>
+                              <svg width="10" height="10" viewBox="0 0 10 10" className="ml-2 -rotate-90 opacity-60" fill="none">
+                                <path d="M2 4l3 3 3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                              </svg>
+                            </div>
+                            <div className="absolute top-0 left-full ml-1 bg-white rounded-xl shadow-xl border border-black/5 min-w-[240px] py-2 opacity-0 -translate-x-1 pointer-events-none group-hover/sub:opacity-100 group-hover/sub:translate-x-0 group-hover/sub:pointer-events-auto transition-all duration-150">
+                              {child.children.map((grand) => (
+                                <Link
+                                  key={grand.label}
+                                  href={grand.href}
+                                  className="block px-4 py-2.5 text-[13px] text-[#262626] hover:bg-[#F0F9FC] hover:text-[#0089B7] transition-colors"
+                                  onClick={() => setActiveDropdown(null)}
+                                >
+                                  {grand.label}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        ) : (
+                          <Link
+                            key={child.label}
+                            href={child.href}
+                            className="block px-4 py-2.5 text-[13px] text-[#262626] hover:bg-[#F0F9FC] hover:text-[#0089B7] transition-colors"
+                            onClick={() => setActiveDropdown(null)}
+                          >
+                            {child.label}
+                          </Link>
+                        )
+                      )}
                     </div>
                   )}
                 </div>
@@ -258,12 +318,13 @@ export default function Navbar() {
           <ul className="space-y-1">
             {PRIMARY_NAV.map((link) => (
               <li key={link.label}>
-                {"children" in link && link.children ? (
+                {link.children && link.children.length > 0 ? (
                   <>
                     <button
-                      onClick={() =>
-                        setExpandedItem(expandedItem === link.label ? null : link.label)
-                      }
+                      onClick={() => {
+                        setExpandedItem(expandedItem === link.label ? null : link.label);
+                        setExpandedSubItem(null);
+                      }}
                       className="w-full flex items-center justify-between py-3 text-left
                                  text-white text-[16px] font-medium border-b border-white/10"
                     >
@@ -277,22 +338,75 @@ export default function Navbar() {
                     </button>
 
                     <div
-                      className={`overflow-hidden transition-all duration-200
-                        ${expandedItem === link.label ? "max-h-80 opacity-100" : "max-h-0 opacity-0"}`}
+                      className={`overflow-hidden transition-all duration-300
+                        ${expandedItem === link.label ? "max-h-[1200px] opacity-100" : "max-h-0 opacity-0"}`}
                     >
                       <ul className="pl-4 py-2 space-y-0">
-                        {link.children.map((child) => (
-                          <li key={child.label}>
-                            <Link
-                              href={child.href}
-                              className="block py-2.5 text-[#99D0E2] text-[15px]
-                                         border-b border-white/5 last:border-0 hover:text-white transition-colors"
-                              onClick={() => setMenuOpen(false)}
-                            >
-                              {child.label}
-                            </Link>
-                          </li>
-                        ))}
+                        {link.children.map((child) => {
+                          const hasGrand = child.children && child.children.length > 0;
+                          const subKey = `${link.label}::${child.label}`;
+                          const subOpen = expandedSubItem === subKey;
+                          return (
+                            <li key={child.label}>
+                              {hasGrand ? (
+                                <>
+                                  <button
+                                    onClick={() =>
+                                      setExpandedSubItem(subOpen ? null : subKey)
+                                    }
+                                    className="w-full flex items-center justify-between py-2.5 text-left
+                                               text-[#99D0E2] text-[15px] border-b border-white/5 hover:text-white transition-colors"
+                                  >
+                                    <span>{child.label}</span>
+                                    <svg
+                                      width="14"
+                                      height="14"
+                                      viewBox="0 0 14 14"
+                                      fill="none"
+                                      className={`transition-transform duration-200 ${subOpen ? "rotate-180" : ""}`}
+                                    >
+                                      <path
+                                        d="M3.5 5.25l3.5 3.5 3.5-3.5"
+                                        stroke="#FFC53A"
+                                        strokeWidth="1.5"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                      />
+                                    </svg>
+                                  </button>
+                                  <div
+                                    className={`overflow-hidden transition-all duration-250
+                                      ${subOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"}`}
+                                  >
+                                    <ul className="pl-4 py-1 space-y-0">
+                                      {child.children!.map((grand) => (
+                                        <li key={grand.label}>
+                                          <Link
+                                            href={grand.href}
+                                            className="block py-2 text-white/70 text-[14px]
+                                                       border-b border-white/5 last:border-0 hover:text-white transition-colors"
+                                            onClick={() => setMenuOpen(false)}
+                                          >
+                                            {grand.label}
+                                          </Link>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                </>
+                              ) : (
+                                <Link
+                                  href={child.href}
+                                  className="block py-2.5 text-[#99D0E2] text-[15px]
+                                             border-b border-white/5 last:border-0 hover:text-white transition-colors"
+                                  onClick={() => setMenuOpen(false)}
+                                >
+                                  {child.label}
+                                </Link>
+                              )}
+                            </li>
+                          );
+                        })}
                       </ul>
                     </div>
                   </>

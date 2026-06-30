@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import ScrollReveal from "@/components/home/ScrollReveal";
 import { CAREERS } from "@/lib/careers";
+import { ApplyProvider, ApplyButton } from "@/components/careers/ApplyControls";
 
 export function generateStaticParams() {
   return CAREERS.map((job) => ({ slug: job.slug }));
@@ -32,6 +33,7 @@ export default async function SingleCareerPage({
   if (!job) notFound();
 
   return (
+    <ApplyProvider jobTitle={job.title}>
     <div className="flex flex-col">
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
@@ -53,25 +55,18 @@ export default async function SingleCareerPage({
         </h1>
 
         {/* Meta row */}
-        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 mb-6">
+        <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 mb-6">
           <span className="text-[#00526E] text-[14px]">{job.school}</span>
           <span className="w-1 h-1 rounded-full bg-[#00526E] shrink-0" />
           <span className="text-[#00526E] text-[14px]">{job.type}</span>
           <span className="w-1 h-1 rounded-full bg-[#00526E] shrink-0" />
           <span className="text-[#00526E] text-[14px]">{job.posted}</span>
+          <span className="w-1 h-1 rounded-full bg-[#00526E] shrink-0" />
+          <span className="text-[#00526E] text-[14px]">{job.closes}</span>
         </div>
 
         {/* Apply CTA */}
-        <a
-          href={`mailto:vacancies@alsson.com?subject=Application — ${job.title}`}
-          className="w-full flex items-center justify-center gap-2 rounded-full bg-[#0089B7] text-white text-[14px] font-medium tracking-[0.05em] uppercase active:bg-[#006E92] transition-colors"
-          style={{ height: "52px", boxShadow: "0px 4px 8px 0px rgba(0,0,0,0.2)" }}
-        >
-          Apply Now
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </a>
+        <ApplyButton variant="hero" />
       </section>
 
       {/* ── Sticky sub-header ─────────────────────────────────────────────── */}
@@ -91,16 +86,7 @@ export default async function SingleCareerPage({
               {job.school} · {job.type}
             </p>
           </div>
-          <a
-            href={`mailto:vacancies@alsson.com?subject=Application — ${job.title}`}
-            className="shrink-0 flex items-center gap-1.5 rounded-full bg-[#0089B7] text-white text-[13px] font-medium active:bg-[#006E92] transition-colors px-4"
-            style={{ height: "40px", boxShadow: "0px 4px 8px 0px rgba(0,0,0,0.2)" }}
-          >
-            Apply Now
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-              <path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </a>
+          <ApplyButton variant="sticky" />
         </div>
       </div>
 
@@ -173,16 +159,7 @@ export default async function SingleCareerPage({
 
           {/* Apply CTA bottom */}
           <ScrollReveal delay={200}>
-            <a
-              href={`mailto:vacancies@alsson.com?subject=Application — ${job.title}`}
-              className="w-full flex items-center justify-center gap-2 rounded-full bg-[#0089B7] text-white text-[15px] font-medium active:bg-[#006E92] transition-colors"
-              style={{ height: "52px", boxShadow: "0px 4px 8px 0px rgba(0,0,0,0.2)" }}
-            >
-              Apply Now
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </a>
+            <ApplyButton variant="bottom" />
 
             <div className="mt-5 flex flex-col gap-2 items-center">
               <p className="text-[#737373] text-[13px] text-center">
@@ -207,5 +184,6 @@ export default async function SingleCareerPage({
       </section>
 
     </div>
+    </ApplyProvider>
   );
 }

@@ -3,7 +3,15 @@
 import { useState } from "react";
 import Link from "next/link";
 
-const FOOTER_SECTIONS = [
+type FooterLink = {
+  label: string;
+  href: string;
+  highlight?: boolean;
+  external?: boolean;
+  children?: { label: string; href: string }[];
+};
+
+const FOOTER_SECTIONS: { heading: string; links: FooterLink[] }[] = [
   {
     heading: "El Alsson School",
     links: [
@@ -18,9 +26,38 @@ const FOOTER_SECTIONS = [
   {
     heading: "Academics",
     links: [
-      { label: "American School", href: "/academics/american" },
-      { label: "British School", href: "/academics/british" },
-      { label: "IB Diploma", href: "/academics/ib" },
+      {
+        label: "American School",
+        href: "/academics/american",
+        children: [
+          { label: "Explore American School", href: "/academics/american" },
+          { label: "Early Childhood (PreS – PreK)", href: "/academics/american/pre-school" },
+          { label: "Kindergarten & Grade 1", href: "/academics/american/kindergarten" },
+          { label: "Elementary (Grades 2–5)", href: "/academics/american/elementary" },
+          { label: "Middle School (Grades 6–8)", href: "/academics/american/middle-school" },
+          { label: "High School (Grades 9–12)", href: "/academics/american/high-school" },
+        ],
+      },
+      {
+        label: "British School",
+        href: "/academics/british",
+        children: [
+          { label: "Explore British School", href: "/academics/british" },
+          { label: "Early Years (FS1 – FS2)", href: "/academics/british/early-years" },
+          { label: "Primary (Years 1–6)", href: "/academics/british/primary" },
+          { label: "Secondary (Years 7–11)", href: "/academics/british/secondary" },
+          { label: "Sixth Form (Years 12–13)", href: "/academics/british/sixth-form" },
+        ],
+      },
+      {
+        label: "IB Diploma Programme",
+        href: "/academics/ibdp",
+        children: [
+          { label: "Explore IBDP", href: "/academics/ibdp" },
+          { label: "IBDP Year 1", href: "/academics/ibdp/year-1" },
+          { label: "IBDP Year 2", href: "/academics/ibdp/year-2" },
+        ],
+      },
     ],
   },
   {
@@ -63,6 +100,7 @@ const FOOTER_SECTIONS = [
 
 export default function Footer() {
   const [expanded, setExpanded] = useState<string | null>(null);
+  const [expandedSub, setExpandedSub] = useState<string | null>(null);
 
   return (
     <footer
@@ -141,25 +179,76 @@ export default function Footer() {
                 >
                   <div className="overflow-hidden">
                     <ul className="pb-4 space-y-2.5 pl-1">
-                      {section.links.map((link) => (
-                        <li key={link.label}>
-                          <Link
-                            href={link.href}
-                            className={`text-[14px] flex items-center gap-1.5 transition-colors ${
-                              link.highlight
-                                ? "text-[#FFC53A] hover:text-[#FFD161]"
-                                : "text-white/60 hover:text-white"
-                            }`}
-                          >
-                            {link.label}
-                            {link.external && (
-                              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="shrink-0">
-                                <path d="M3 9l6-6M4.5 3h4.5v4.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                              </svg>
-                            )}
-                          </Link>
-                        </li>
-                      ))}
+                      {section.links.map((link) => {
+                        const hasChildren = link.children && link.children.length > 0;
+                        const subKey = `${section.heading}::${link.label}`;
+                        const subOpen = expandedSub === subKey;
+                        if (hasChildren) {
+                          return (
+                            <li key={link.label}>
+                              <button
+                                onClick={() => setExpandedSub(subOpen ? null : subKey)}
+                                className="w-full flex items-center justify-between text-[14px] text-white/80 hover:text-white transition-colors"
+                              >
+                                <span>{link.label}</span>
+                                <svg
+                                  width="14"
+                                  height="14"
+                                  viewBox="0 0 14 14"
+                                  fill="none"
+                                  className={`transition-transform duration-200 ${subOpen ? "rotate-180" : ""}`}
+                                >
+                                  <path
+                                    d="M3.5 5.25l3.5 3.5 3.5-3.5"
+                                    stroke="#FFC53A"
+                                    strokeWidth="1.5"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                  />
+                                </svg>
+                              </button>
+                              <div
+                                className="grid transition-[grid-template-rows] duration-200 ease-out"
+                                style={{ gridTemplateRows: subOpen ? "1fr" : "0fr" }}
+                              >
+                                <div className="overflow-hidden">
+                                  <ul className="pl-3 pt-2 pb-1 space-y-2 border-l border-white/10">
+                                    {link.children!.map((grand) => (
+                                      <li key={grand.label}>
+                                        <Link
+                                          href={grand.href}
+                                          className="block text-[13px] text-white/55 hover:text-white transition-colors pl-3"
+                                        >
+                                          {grand.label}
+                                        </Link>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              </div>
+                            </li>
+                          );
+                        }
+                        return (
+                          <li key={link.label}>
+                            <Link
+                              href={link.href}
+                              className={`text-[14px] flex items-center gap-1.5 transition-colors ${
+                                link.highlight
+                                  ? "text-[#FFC53A] hover:text-[#FFD161]"
+                                  : "text-white/60 hover:text-white"
+                              }`}
+                            >
+                              {link.label}
+                              {link.external && (
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="shrink-0">
+                                  <path d="M3 9l6-6M4.5 3h4.5v4.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                              )}
+                            </Link>
+                          </li>
+                        );
+                      })}
                     </ul>
                   </div>
                 </div>

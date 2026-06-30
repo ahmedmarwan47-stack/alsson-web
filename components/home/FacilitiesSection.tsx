@@ -7,43 +7,62 @@ import Link from "next/link";
 const FACILITIES_DATA = [
   {
     id: 1,
-    tags: ["Athletic", "Outdoors"],
-    title: "Sports Hall & Aquatics",
-    description: "Olympic-standard pool and indoor courts designed for competitive sports and recreational training.",
+    title: "Sports & Recreation",
+    tags: [
+      "Indoor Heated Pool",
+      "Dance",
+      "Fitness Studio",
+      "Outdoors",
+      "Indoor Sports Courts",
+      "Viewing Room",
+      "Playgrounds",
+      "Padel Tennis Courts",
+      "Football Courts",
+      "Basketball Courts",
+    ],
     image: "/images/facility-sports-hall.jpg",
   },
   {
     id: 2,
-    tags: ["Athletic", "Outdoors"],
-    title: "Playgrounds & Fields",
-    description: "Expansive outdoor areas including football fields, basketball courts, and dedicated play zones.",
-    image: "/images/facility-playgrounds.jpg",
-  },
-  {
-    id: 3,
-    tags: ["Art", "Education"],
-    title: "State-of-the-Art Classrooms",
-    description: "Smart boards, collaborative seating, and hands-on learning tools in every classroom.",
+    title: "Learning Spaces",
+    tags: ["State of the Art", "Science Labs", "Robotics Lab", "Libraries"],
     image: "/images/facility-classrooms.jpg",
   },
   {
+    id: 3,
+    title: "Student Wellbeing",
+    tags: ["Clinics"],
+    image: "/images/facility-libraries.jpg",
+  },
+  {
     id: 4,
-    tags: ["Events", "Theatre"],
-    title: "Performing Arts Theatre",
-    description: "A fully-equipped venue hosting productions, ceremonies, and student performances year-round.",
+    title: "Arts & Performing Arts",
+    tags: [
+      "260 Seat Theatre",
+      "Drama Studio",
+      "Radio Studio",
+      "Music Rooms",
+      "Amphitheater",
+      "Multipurpose Small Halls",
+    ],
     image: "/images/facility-theatre.jpg",
   },
   {
     id: 5,
-    tags: ["Labs", "Academics"],
-    title: "Libraries & Research Hubs",
-    description: "Curated collections, digital resources, and quiet study spaces for independent learners.",
-    image: "/images/facility-libraries.jpg",
+    title: "Transportation",
+    tags: [],
+    image: "/images/facility-playgrounds.jpg",
+  },
+  {
+    id: 6,
+    title: "Campus Operations",
+    tags: ["Engineering", "Daycare", "Teacher Resources Center"],
+    image: "/images/facility-classrooms.jpg",
   },
 ];
 
-const CARD_W = 240;
-const CARD_W_ACTIVE = 268;
+const CARD_W = 260;
+const CARD_W_ACTIVE = 300;
 
 export default function FacilitiesSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -113,7 +132,7 @@ export default function FacilitiesSection() {
                 className="relative shrink-0"
                 style={{
                   width: isActive ? `${CARD_W_ACTIVE}px` : `${CARD_W}px`,
-                  height: "320px",
+                  height: "420px",
                   transition: "width 0.35s cubic-bezier(0.22,1,0.36,1)",
                 }}
               >
@@ -129,33 +148,23 @@ export default function FacilitiesSection() {
                   />
                   <div
                     className="absolute inset-0"
-                    style={{ background: "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.1) 55%, rgba(0,0,0,0) 75%)" }}
+                    style={{ background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.25) 55%, rgba(0,0,0,0) 80%)" }}
                   />
-                  <div className="relative p-4 flex flex-col gap-1.5">
-                    <div className="flex gap-2 flex-wrap">
-                      {fac.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[12px] font-normal"
-                          style={{ background: "#FFC53A", color: "#000" }}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <p className="text-[#FAFAFA] font-medium text-[17px] leading-[1.3]">{fac.title}</p>
-                    {/* Description — reveals when active */}
-                    <p
-                      className="text-[#E5E5E5] text-[12px] leading-[1.45]"
-                      style={{
-                        maxHeight: isActive ? "56px" : "0px",
-                        opacity: isActive ? 1 : 0,
-                        overflow: "hidden",
-                        transition: "max-height 0.35s cubic-bezier(0.22,1,0.36,1), opacity 0.25s ease",
-                      }}
-                    >
-                      {fac.description}
-                    </p>
+                  <div className="relative p-4 flex flex-col gap-2.5">
+                    {fac.tags.length > 0 && (
+                      <div className="flex gap-1.5 flex-wrap">
+                        {fac.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-normal whitespace-nowrap"
+                            style={{ background: "#FFC53A", color: "#000" }}
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                    <p className="text-[#FAFAFA] font-medium text-[20px] leading-[1.3]">{fac.title}</p>
                   </div>
                 </div>
               </div>
